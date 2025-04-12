@@ -18,7 +18,7 @@ def load_stopwords():
         logger.error(f"Stopwords file not found at {STOPWORDS_PATH}")
         return set()
 
-def extract_nouns(text, stopwords):
+def extract_nouns_from_text(text, stopwords):
     if not isinstance(text, str):
         return []
 
@@ -26,9 +26,10 @@ def extract_nouns(text, stopwords):
     filtered = [word for word in nouns if word not in stopwords and len(word) > 1]
     return filtered
 
-def extract_nouns(df_reviews):
+def extract_nouns_from_reviews(df_reviews):
     logger.info("명사 추출 및 불용어 제거 시작")
     stopwords = load_stopwords()
-    df_reviews["content_nouns"] = df_reviews["content"].apply(lambda x: extract_nouns(x, stopwords))
+    df_reviews["content_nouns"] = df_reviews["content"].apply(lambda x: extract_nouns_from_text(x, stopwords))
     logger.info("명사 추출 및 불용어 제거 완료")
     return df_reviews
+

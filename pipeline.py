@@ -3,7 +3,7 @@ from s3.fetch_data import fetch_place_info, fetch_reviews
 from preprocess.deduplicate_places import deduplicate_places
 from preprocess.filter_columns import filter_columns
 from preprocess.clean_text import clean_text
-from preprocess.extract_nouns import extract_nouns as extract_nouns_from_df
+from preprocess.extract_nouns import extract_nouns_from_reviews
 from preprocess.validate_reviews import validate_reviews
 from preprocess.csv_to_json import convert_to_json
 from db.init_collections import init_collections
@@ -45,7 +45,7 @@ def run_pipeline(region_csv_path: str):
 
     try:
         logger.info("🧠 Step 5: 명사 추출 및 불용어 제거...")
-        df_reviews_nouns = extract_nouns_from_df(df_reviews_cleaned)
+        df_reviews_nouns = extract_nouns_from_reviews(df_reviews_cleaned)
     except Exception as e:
         logger.error(f"❌ 명사 추출 실패: {e}")
         return
