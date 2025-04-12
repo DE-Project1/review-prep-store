@@ -7,5 +7,6 @@ def insert_data(place_info_json, reviews_json):
     db["place_info"].drop()
     db["place_info"].insert_many(place_info_json)
 
-    db["place_info"].drop()
-    db["place_info"].insert_many(reviews_json)
+    db["reviews"].drop()
+    db["reviews"].insert_many(reviews_json)
+
