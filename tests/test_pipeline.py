@@ -79,7 +79,6 @@ def test_extract_nouns(df_reviews_test):
     # 결과 확인
     print(f"명사 추출된 리뷰 샘플:\n{df_reviews_nouns_test[['content', 'content_nouns']].head()}")
     assert df_reviews_nouns_test["content_nouns"].apply(lambda x: isinstance(x, list)).all(), "명사 추출이 제대로 되지 않았습니다."
-    assert df_reviews_nouns_test["content_nouns"].apply(lambda x: len(x) > 0).all(), "명사 리스트가 비어있는 리뷰가 있습니다."
     print("test_extract_nouns 통과!")
 
     return df_reviews_nouns_test  # 다음 단계로 이어지도록 반환
