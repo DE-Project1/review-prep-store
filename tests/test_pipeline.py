@@ -1,7 +1,9 @@
+import sys
 import os
-import pandas as pd
-from pipeline import deduplicate_places, filter_columns, clean_text, extract_nouns_from_df, validate_reviews, convert_to_json
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # 루트 디렉토리 경로 추가
 
+import pandas as pd
+from pipeline import deduplicate_places, filter_columns, clean_text, extract_nouns_from_reviews, validate_reviews, convert_to_json
 
 # 테스트 데이터를 로컬에서 읽어오기
 def load_test_data():
@@ -72,7 +74,7 @@ def test_clean_text(df_reviews_test):
 
 def test_extract_nouns(df_reviews_test):
     # 명사 추출 실행
-    df_reviews_nouns_test = extract_nouns_from_df(df_reviews_test)
+    df_reviews_nouns_test = extract_nouns_from_reviews(df_reviews_test)
 
     # 결과 확인
     print(f"명사 추출된 리뷰 샘플:\n{df_reviews_nouns_test[['content', 'content_nouns']].head()}")
