@@ -1,4 +1,3 @@
-import pandas as pd
 from config.db_config import get_database
 
 #place_info_json, reviews_json 몽고디비 적재
