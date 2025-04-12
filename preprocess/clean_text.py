@@ -6,7 +6,7 @@ def clean_text(df_reviews: pd.DataFrame):
     df_cleaned = df_reviews.dropna(subset=["content"])
 
     # 이모지, 특수문자 제거
-    df_cleaned["content"] = df_cleaned["content"].apply(
+    df_cleaned.loc["content"] = df_cleaned["content"].apply(
         lambda x: re.sub(r"[^가-힣a-zA-Z0-9\s]", "", x)
     )
 
