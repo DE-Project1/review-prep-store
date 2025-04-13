@@ -41,7 +41,9 @@ def run_pipeline(region_csv_path: str):
 
     try:
         logger.info("🧼 Step 4: 리뷰 텍스트 클렌징...")
+        logger.debug(f"🔢 클렌징 전 리뷰 수: {len(df_reviews_filtered)}")
         df_reviews_cleaned = clean_text(df_reviews_filtered)
+        logger.debug(f"🔢 클렌징 후 리뷰 수: {len(df_reviews_cleaned)}")
         logger.debug(f"✂️ Cleaned review 예시: {df_reviews_cleaned['content'].iloc[0]}")
     except Exception as e:
         logger.error(f"❌ 텍스트 클렌징 실패: {e}")
@@ -49,7 +51,9 @@ def run_pipeline(region_csv_path: str):
 
     try:
         logger.info("🧠 Step 5: 명사 추출 및 불용어 제거...")
+        logger.debug(f"🔢 명사 추출 전 리뷰 수: {len(df_reviews_cleaned)}")
         df_reviews_nouns = extract_nouns_from_reviews(df_reviews_cleaned)
+        logger.debug(f"🔢 명사 추출 후 리뷰 수: {len(df_reviews_nouns)}")
         logger.debug(f"🔠 Noun extraction 예시: {df_reviews_nouns['content_nouns'].iloc[0]}")
     except Exception as e:
         logger.error(f"❌ 명사 추출 실패: {e}")
@@ -57,7 +61,9 @@ def run_pipeline(region_csv_path: str):
 
     try:
         logger.info("✅ Step 6: 유효 리뷰만 필터링...")
+        logger.debug(f"🔢 유효성 검증 전 리뷰 수: {len(df_reviews_nouns)}")
         df_reviews_valid = validate_reviews(df_reviews_nouns)
+        logger.debug(f"🔢 유효성 검증 후 리뷰 수: {len(df_reviews_valid)}")
         logger.debug(f"🧪 유효 리뷰 수: {len(df_reviews_valid)}")
     except Exception as e:
         logger.error(f"❌ 유효 리뷰 필터링 실패: {e}")
