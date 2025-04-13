@@ -50,7 +50,7 @@ def run_pipeline(region_csv_path: str):
     try:
         logger.info("🧠 Step 5: 명사 추출 및 불용어 제거...")
         df_reviews_nouns = extract_nouns_from_reviews(df_reviews_cleaned)
-        logger.debug(f"🔠 Noun extraction 예시: {df_reviews_nouns['nouns'].iloc[0]}")
+        logger.debug(f"🔠 Noun extraction 예시: {df_reviews_nouns['content_nouns'].iloc[0]}")
     except Exception as e:
         logger.error(f"❌ 명사 추출 실패: {e}")
         return
