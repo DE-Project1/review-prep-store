@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 from utils.logger import get_logger  # 로그 추가
 
-load_dotenv()
+load_dotenv(dotenv_path='env/.env')
 
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
