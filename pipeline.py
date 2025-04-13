@@ -42,7 +42,7 @@ def run_pipeline(region_csv_path: str):
     try:
         logger.info("🧼 Step 4: 리뷰 텍스트 클렌징...")
         df_reviews_cleaned = clean_text(df_reviews_filtered)
-        logger.debug(f"✂️ Cleaned review 예시: {df_reviews_cleaned['cleaned_text'].iloc[0]}")
+        logger.debug(f"✂️ Cleaned review 예시: {df_reviews_cleaned['content'].iloc[0]}")
     except Exception as e:
         logger.error(f"❌ 텍스트 클렌징 실패: {e}")
         return
