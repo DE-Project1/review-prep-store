@@ -26,10 +26,25 @@ def extract_nouns_from_text(text, stopwords):
     filtered = [word for word in nouns if word not in stopwords and len(word) > 1]
     return filtered
 
+
 def extract_nouns_from_reviews(df_reviews):
     logger.info("명사 추출 및 불용어 제거 시작")
     stopwords = load_stopwords()
-    df_reviews["content_nouns"] = df_reviews["content"].apply(lambda x: extract_nouns_from_text(x, stopwords))
+    total = len(df_reviews)
+
+    content_nouns = []
+
+    for idx, row in df_reviews.iterrows():
+        text = row["content"]
+        nouns = extract_nouns_from_text(text, stopwords)
+        content_nouns.append(nouns)
+
+        # 💡 중간 진행상황 로그 (1000개 단위로)
+        if (idx + 1) % 1000 == 0 or (idx + 1) == total:
+            logger.debug(f"🔄 명사 추출 진행 중: {idx + 1}/{total}개 완료")
+
+    df_reviews["content_nouns"] = content_nouns
     logger.info("명사 추출 및 불용어 제거 완료")
     return df_reviews
+
 
