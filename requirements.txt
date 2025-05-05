@@ -5,6 +5,12 @@ pandas>=1.5.0
 # AWS S3
 boto3>=1.26.0
 
+# Google
+google-api-python-client
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+
 # MongoDB
 pymongo>=4.3.0
 certifi>=2023.7.22
@@ -25,3 +31,5 @@ tqdm>=4.64.0
 
 # Testing
 pytest>=7.2.0
+
+

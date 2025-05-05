@@ -1,11 +1,11 @@
 # pipeline.py
-from s3.fetch_data import fetch_place_info, fetch_reviews
+from googled_fetch_data import fetch_place_info, fetch_reviews
 from preprocess.deduplicate_places import deduplicate_places
 from preprocess.filter_columns import filter_columns
 from preprocess.clean_text import clean_text
 from preprocess.extract_nouns import extract_nouns_from_reviews
 from preprocess.validate_reviews import validate_reviews
-from preprocess.csv_to_json import convert_to_json
+from tests.csv_to_json import convert_to_json
 from db.init_collections import init_collections
 from db.insert_data import insert_data
 from utils.logger import get_logger
@@ -14,12 +14,12 @@ logger = get_logger("pipeline")
 
 def run_pipeline(region_csv_path: str):
     try:
-        logger.info("🚀 Step 1: S3에서 데이터 불러오는 중...")
+        logger.info("🚀 Step 1: Google Drive에서 데이터 불러오는 중...")
         df_place_info_raw = fetch_place_info()
         df_reviews_raw = fetch_reviews()
         logger.debug(f"📦 Place info shape: {df_place_info_raw.shape}, Reviews shape: {df_reviews_raw.shape}")
     except Exception as e:
-        logger.error(f"❌ S3 데이터 불러오기 실패: {e}")
+        logger.error(f"❌ Google Drive 데이터 불러오기 실패: {e}")
         return
 
     try:
@@ -99,3 +99,15 @@ def run_pipeline(region_csv_path: str):
 # 실행 (python pipeline.py)
 if __name__ == "__main__":
     run_pipeline("data/adm_dong_list.csv")
+
+
+
+
+
+
+
+
+
+
+
+
